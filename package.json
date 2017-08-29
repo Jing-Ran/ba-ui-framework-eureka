@@ -1,0 +1,30 @@
+{
+  "name": "ba-ui-framework-eureka",
+  "version": "1.0.0",
+  "description": "This repository will contain the codebase to the UI Framework created by team of awesome individuals.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jing-Ran/ba-ui-framework-eureka.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jing-Ran/ba-ui-framework-eureka/issues"
+  },
+  "homepage": "https://github.com/Jing-Ran/ba-ui-framework-eureka#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-csslint": "^1.0.0",
+    "gulp-htmlhint": "^0.3.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-watch": "^4.3.11"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0"
+  }
+}

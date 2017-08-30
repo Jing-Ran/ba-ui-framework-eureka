@@ -9,6 +9,7 @@ var jshint = require('gulp-jshint');
 var minifyCss = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var uglifyJs = require('gulp-uglify');
+var rename = require('gulp-rename');
 
 var knownOptions = {
   string: 'path',
@@ -85,6 +86,7 @@ gulp.task('optimize-css', function () {
 gulp.task('optimize-js', function () {
   return gulp.src('javascript/*.js')
     .pipe(concat('main.js')).on('error', handleError)
+    .pipe(rename('main.js'))
     .pipe(uglifyJs()).on('error', handleError)
     .pipe(gulp.dest('min'));
 });

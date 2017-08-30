@@ -3,7 +3,7 @@ var minimist = require('minimist');
 var htmlhint = require('gulp-htmlhint');
 var watch = require('gulp-watch');
 var sass = require('gulp-sass');
-// var csslint = require('gulp-csslint');
+var csslint = require('gulp-csslint');
 // var jshint = require('gulp-jshint');
 // var minifyCss = require('gulp-clean-css');
 // var concat = require('gulp-concat');
@@ -47,10 +47,10 @@ gulp.task('watch', function () {
 });
 
 // Validate CSS
-// gulp.task('csslint', function () {
-//   return gulp.src('styles/css/*.css')
-//     .pipe(csslint('csslintrc.json'))
-//     .pipe(csslint.formatter('compact'))
-//     .pipe(csslint.formatter('fail'));
-// });
+gulp.task('csslint', function () {
+  return gulp.src('styles/css/*.css')
+    .pipe(csslint('csslintrc.json'))
+    .pipe(csslint.formatter('compact'))
+    .pipe(csslint.formatter('fail'));
+});
 

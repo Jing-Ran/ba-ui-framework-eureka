@@ -4,12 +4,12 @@ var htmlhint = require('gulp-htmlhint');
 var watch = require('gulp-watch');
 var sass = require('gulp-sass');
 var csslint = require('gulp-csslint');
-// var jshint = require('gulp-jshint');
-// var minifyCss = require('gulp-clean-css');
-// var concat = require('gulp-concat');
+var imagemin = require('gulp-imagemin');
+var jshint = require('gulp-jshint');
+var minifyCss = require('gulp-clean-css');
+var concat = require('gulp-concat');
 // var rename = require('gulp-rename');
 // var uglifyJs = require('gulp-uglify');
-// var imagemin = require('gulp-imagemin');
 
 var knownOptions = {
   string: 'path',
@@ -35,7 +35,6 @@ gulp.task('html', function () {
 
 // compile sass task
 gulp.task('sass', function () {
-  console.log('Compiling Sass');
   return gulp.src('styles/sass/eureka.scss')
     .pipe(sass()).on('error', handleError)
     .pipe(gulp.dest('styles/css'));
@@ -54,3 +53,31 @@ gulp.task('csslint', function () {
     .pipe(csslint.formatter('fail'));
 });
 
+// Validate js
+gulp.task('lint', function () {
+  return gulp.src(options.path)
+    .pipe(jshint({
+      undef: true,
+      globals: {
+        module: true,
+        require: true,
+        console: true
+      }
+    }))
+    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail')); // Stops running if any error exists
+});
+
+// Minify images
+gulp.task('optimize-img', function () {
+  return gulp.src('images/**/**/')
+    .pipe(imagemin()).on('error', handleError)
+    .pipe(gulp.dest('min/img'));
+});
+
+// Concatenate and minify compiled css files
+gulp.task('optimize-css', function () {
+  return gulp.src('styles/css/*.css')
+    .pipe(minifyCss()).on('error', handleError)
+    .pipe(gulp.dest('min'));
+});

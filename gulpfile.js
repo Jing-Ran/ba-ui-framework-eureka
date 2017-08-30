@@ -8,8 +8,7 @@ var imagemin = require('gulp-imagemin');
 var jshint = require('gulp-jshint');
 var minifyCss = require('gulp-clean-css');
 var concat = require('gulp-concat');
-// var rename = require('gulp-rename');
-// var uglifyJs = require('gulp-uglify');
+var uglifyJs = require('gulp-uglify');
 
 var knownOptions = {
   string: 'path',
@@ -75,9 +74,17 @@ gulp.task('optimize-img', function () {
     .pipe(gulp.dest('min/img'));
 });
 
-// Concatenate and minify compiled css files
+// Minify compiled css file
 gulp.task('optimize-css', function () {
   return gulp.src('styles/css/*.css')
     .pipe(minifyCss()).on('error', handleError)
+    .pipe(gulp.dest('min'));
+});
+
+// Uglify & concatenate JSs to min/
+gulp.task('optimize-js', function () {
+  return gulp.src('javascript/*.js')
+    .pipe(concat('main.js')).on('error', handleError)
+    .pipe(uglifyJs()).on('error', handleError)
     .pipe(gulp.dest('min'));
 });
